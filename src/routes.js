@@ -4,19 +4,19 @@ import { Route } from 'react-router-dom'
 
 import {
   Lobby,
-  Game,
+  Batch,
   SignIn,
-  SignUp
+  Student,
 } from './containers'
 
 export default class Routes extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={Lobby} />
-        <Route path="/play/:gameId" component={Game} />
+        <Route exact path="/batches" component={Lobby} />
+        <Route exact path="/batches/:batchId" component={Batch} />
+        <Route exact path="/batches/:batchId/students/:studentId" component={Student} />
         <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-up" component={SignUp} />
       </div>
     )
   }
