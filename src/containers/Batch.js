@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { fetchOneBatch, fetchStudents } from '../actions/batches/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
+import Student from '../components/students/student.js'
 import CreateStudentForm from '../components/batches/CreateStudentForm.js'
 import CreateQuestion from '../components/batches/createQuestion.js'
 import Paper from 'material-ui/Paper'
@@ -45,29 +46,6 @@ class Batch extends PureComponent {
   }
   goToStudent = studentId => event => this.props.push(`/batches/${this.props.batch._id}/students/${studentId}`)
 
-  renderStudents = (student, index) => {
-    let color = 'grey'
-    if (student.evaluations.length>0) {
-      color = student.evaluations[0].evaluation
-    }
-    const Style = {
-     display: 'flex',
-     flexFlow: 'column wrap',
-     float: 'left',
-     width: '325px',
-     margin: '20px',
-     padding: '20px',
-     backgroundColor: color,
-    }
-
-    return (
-      <MenuItem style={Style}
-        key={index}
-        onClick={this.goToStudent(student._id)}
-        primaryText={`Student ${index+1} : ` + student.name} />
-    )
-  }
-
   render() {
     const { batch } = this.props
 
@@ -79,13 +57,13 @@ class Batch extends PureComponent {
         <h1> CLASS {batch.batchNumber}! </h1>
         <br/>
         <CreateStudentForm batch={batch}/>
-        <CreateQuestion students={batch}/>
+        <CreateQuestion batch={batch}/>
         <br/>
-        <Paper className="paper">
-          <Menu>
-            {this.props.batch.students.map(this.renderStudents)}
-          </Menu>
-        </Paper>
+        <div>
+            {batch.students.map((student,index) => {
+              return <Student key={index} id={index} student={student} onClick={this.goToStudent(student._id)}/>
+            })}
+        </div>
 
       </div>
     )
