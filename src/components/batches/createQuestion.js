@@ -76,18 +76,18 @@ class CreateQuestion extends PureComponent {
     const student = this.state.questionStudent
 
     return (
-      <div className="CreateStudentForm">
-          <RaisedButton
-            type="submit"
-            onClick={this.preventEvent(this.props.batch)}
-            label="Next question"
-            primary={true}
-            icon={<StarIcon />} />
-
+      <div style={{float: 'left', border: "1px solid green", marginBottom: '20px'}}>
             {student?
               <Student student={student} onClick={this.goToStudent(student._id)}/>
               : ''}
-
+            <div style={{clear: 'left'}}>
+              <RaisedButton
+                type="submit"
+                onClick={this.preventEvent(this.props.batch)}
+                label="Next question"
+                primary={true}
+                icon={<StarIcon />} />
+            </div>
       </div>
     )
   }

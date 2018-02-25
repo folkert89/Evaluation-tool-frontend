@@ -56,9 +56,12 @@ class Batch extends PureComponent {
 
         <h1> CLASS {batch.batchNumber}! </h1>
         <br/>
-        <CreateStudentForm batch={batch}/>
         <CreateQuestion batch={batch}/>
         <br/>
+        <br/>
+        <CreateStudentForm batch={batch}/>
+        <br/>
+        <h2>Students:</h2>
         <div>
             {batch.students.map((student,index) => {
               return <Student key={index} id={index} student={student} onClick={this.goToStudent(student._id)}/>

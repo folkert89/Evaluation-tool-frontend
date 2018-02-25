@@ -29,7 +29,7 @@ class CreateStudentForm extends PureComponent {
     if (!this.props.signedIn) return null
 
     return (
-      <div className="CreateStudentForm">
+      <div className="CreateStudentForm" style={{clear: 'left'}}>
         <form
           onSubmit={this.submitForm.bind(this)}
         > <label style={{display: 'block'}}>
