@@ -1,13 +1,11 @@
-// src/components/batches/CreateBatchButton.js
+// src/components/batches/RenderBatchButton.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import Paper from 'material-ui/Paper'
 
-
-
-class CreateEvaluation extends PureComponent {
+class RenderEvaluation extends PureComponent {
 
   render() {
     const Style = {
@@ -38,4 +36,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
 
-export default connect(mapStateToProps)(CreateEvaluation)
+export default connect(mapStateToProps)(RenderEvaluation)

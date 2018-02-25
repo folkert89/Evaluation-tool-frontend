@@ -7,6 +7,7 @@ import {  push } from 'react-router-redux'
 import { withRouter } from 'react-router-dom'
 import Evaluation from '../components/students/evaluations.js'
 import Paper from 'material-ui/Paper'
+import CreateEvaluation from '../components/students/CreateEvaluation.js'
 
 class Student extends PureComponent {
 
@@ -54,6 +55,7 @@ class Student extends PureComponent {
 
         {student? <img alt="Profile Picture" height="150" width="150" src={student.photo }></img> : ''}
         {student? <h2>{student.name }</h2>: ''}
+        <CreateEvaluation batch={batch} student={student}/>
         {evaluations.length > 0 ?
           <div>
               {evaluations.map((evaluation,index) => {

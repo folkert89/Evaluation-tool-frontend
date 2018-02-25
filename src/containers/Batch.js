@@ -57,8 +57,6 @@ class Batch extends PureComponent {
         <h1> CLASS {batch.batchNumber}! </h1>
         <br/>
         <CreateQuestion batch={batch}/>
-        <br/>
-        <br/>
         <CreateStudentForm batch={batch}/>
         <br/>
         <h2>Students:</h2>

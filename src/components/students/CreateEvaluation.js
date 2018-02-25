@@ -4,43 +4,46 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
-import {createStudent} from '../../actions/batches/create'
+import {CreateEvaluation} from '../../actions/batches/create'
 
-class CreateStudentForm extends PureComponent {
+class CreateEvaluationForm extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool,
   }
 
-  componentWillMount() {
-    const { createStudent } = this.props
-  }
-
   submitForm(event) {
     event.preventDefault()
-    const newStudent = {
-      name: this.refs.name.value,
-      photo: this.refs.photo.value,
+    const newEvaluation = {
+      color: this.refs.color.value,
+      date: this.refs.date.value,
+      remark: this.refs.remark.value,
     }
-    this.props.createStudent(this.props.batch, newStudent)
+    console.log(this.props.batch)
+    console.log(this.props.student)
+    this.props.CreateEvaluation(this.props.batch, this.props.student, newEvaluation)
   }
 
   render() {
     if (!this.props.signedIn) return null
 
     return (
-      <div className="CreateStudentForm" style={{clear: 'left'}}>
+      <div className="CreateEvaluationForm" style={{clear: 'left'}}>
         <form
           onSubmit={this.submitForm.bind(this)}
         > <label style={{display: 'block'}}>
-            Name:   <input type="text" ref="name" />
+            Color:   <input type="text" ref="color" placeholder="type red, orange or green"/>
           </label>
           <label style={{display: 'block'}}>
-            Photo:   <input type="text" ref="photo" />
+              date:
+              <input type="date" ref="date"/>
+          </label>
+          <label style={{display: 'block'}}>
+            Remark:   <input type="text" ref="remark" />
           </label>
           <br/>
           <RaisedButton
             type="submit"
-            label="Create Student"
+            label="Create Evaluation"
             primary={true}
             icon={<StarIcon />} />
         </form>
@@ -53,4 +56,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
 
-export default connect(mapStateToProps, { createStudent })(CreateStudentForm)
+export default connect(mapStateToProps, { CreateEvaluation })(CreateEvaluationForm)

@@ -24,7 +24,6 @@ class CreateQuestion extends PureComponent {
   }
 
   getColors = batch => {
-    console.log(batch.students)
     let green = []
     let red = []
     let orange = []
@@ -46,7 +45,6 @@ class CreateQuestion extends PureComponent {
 
   getStudent = (green, red, orange) => {
     const randNumb = Math.floor(Math.random() * 100) + 1;
-    console.log(randNumb)
     if (randNumb > 51) {
       this.conditions(red)
     } else if (randNumb > 18 && randNumb <=51) {
@@ -64,7 +62,6 @@ class CreateQuestion extends PureComponent {
     } else {
       return this.getColors(this.props.batch)
     }
-    console.log(chosenStudent)
     this.setState({questionStudent: chosenStudent})
   }
 
