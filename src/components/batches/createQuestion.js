@@ -2,6 +2,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+import Student from '../students/student.js'
 import RaisedButton from 'material-ui/RaisedButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
 
@@ -10,17 +12,22 @@ class CreateQuestion extends PureComponent {
     signedIn: PropTypes.bool,
   }
 
+  constructor(props) {
+  super(props);
+  this.state = {
+    questionStudent: null
+  };
+}
+
   preventEvent = batch => event => {
-    console.log(batch)
     this.getColors(batch)
   }
 
   getColors = batch => {
-
+    console.log(batch.students)
     let green = []
     let red = []
     let orange = []
-
 
     batch.students.map(student => {
       if (!student.evaluations.length>0) {
@@ -38,15 +45,11 @@ class CreateQuestion extends PureComponent {
   }
 
   getStudent = (green, red, orange) => {
-    console.log(green)
-    console.log(red)
-    console.log(orange)
     const randNumb = Math.floor(Math.random() * 100) + 1;
     console.log(randNumb)
     if (randNumb > 51) {
       this.conditions(red)
     } else if (randNumb > 18 && randNumb <=51) {
-      console.log(orange)
       this.conditions(orange)
     } else {
       this.conditions(green)
@@ -55,23 +58,22 @@ class CreateQuestion extends PureComponent {
 
   conditions = color => {
     let chosenStudent = {}
-    if (color.length > 1) {
+    if (color.length >= 1) {
       const randIndex = Math.floor(Math.random() * color.length);
       chosenStudent = color[randIndex]
-    } else if (color.length == 1) {
-      chosenStudent = color
-      console.log('minder', color)
     } else {
-      console.log(this.props.batch)
-      this.getColors(this.props.batch)
+      return this.getColors(this.props.batch)
     }
     console.log(chosenStudent)
+    this.setState({questionStudent: chosenStudent})
   }
 
+  goToStudent = studentId => event => this.props.push(`/batches/${this.props.batch._id}/students/${studentId}`)
 
   render() {
 
     if (!this.props.signedIn) return null
+    const student = this.state.questionStudent
 
     return (
       <div className="CreateStudentForm">
@@ -82,6 +84,10 @@ class CreateQuestion extends PureComponent {
             primary={true}
             icon={<StarIcon />} />
 
+            {student?
+              <Student student={student} onClick={this.goToStudent(student._id)}/>
+              : ''}
+
       </div>
     )
   }
@@ -91,4 +97,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
 
-export default connect(mapStateToProps)(CreateQuestion)
+export default connect(mapStateToProps,{push})(CreateQuestion)

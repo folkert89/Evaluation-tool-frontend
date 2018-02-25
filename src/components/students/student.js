@@ -8,11 +8,11 @@ import Paper from 'material-ui/Paper'
 class Student extends PureComponent {
 
   render() {
-    const { student, key, onClick, id } = this.props
+    const { student, key, onClick } = this.props
 
     let color = 'grey'
     if (student.evaluations.length>0) {
-      color = student.evaluations[0].evaluation
+      color = student.evaluations[student.evaluations.length-1].evaluation
     }
     const Style = {
      display: 'flex',
@@ -31,7 +31,7 @@ class Student extends PureComponent {
         onClick={onClick}>
             <img src={student.photo} alt='profile picture' width='100px' height='100px'/>
             <br/>
-            {`Student ${id+1} : ` + student.name}
+            {student.name}
 
         </Paper>
 
