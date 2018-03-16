@@ -24,7 +24,8 @@ class Lobby extends PureComponent {
       <MenuItem
         key={index}
         onClick={this.goToBatch(batch._id)}
-        primaryText={"Batchnumber: " + batch.batchNumber + "- - - - - -" + "Amount of students: " + batch.students.length} />
+        primaryText={"Batchnumber: " + batch.batchNumber + "- - - - - -" + "Amount of students: " + batch.students.length}
+        secondaryText={"startDate: " + batch.startDate} />
     )
   }
 

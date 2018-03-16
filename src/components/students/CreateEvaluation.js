@@ -18,8 +18,7 @@ class CreateEvaluationForm extends PureComponent {
       date: this.refs.date.value,
       remark: this.refs.remark.value,
     }
-    console.log(this.props.batch)
-    console.log(this.props.student)
+    
     this.props.CreateEvaluation(this.props.batch, this.props.student, newEvaluation)
   }
 
