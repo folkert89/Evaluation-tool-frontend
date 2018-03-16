@@ -25,7 +25,7 @@ class Lobby extends PureComponent {
         key={index}
         onClick={this.goToBatch(batch._id)}
         primaryText={"Batchnumber: " + batch.batchNumber + "- - - - - -" + "Amount of students: " + batch.students.length}
-        secondaryText={"startDate: " + batch.startDate} />
+        secondaryText={`Period: ${batch.startDate.replace(/T.*/, "")} - ${batch.endDate.replace(/T.*/, "")}`} />
     )
   }
 
